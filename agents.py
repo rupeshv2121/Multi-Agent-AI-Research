@@ -1,3 +1,5 @@
+import os
+
 from langchain.agents import create_agent
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
@@ -5,9 +7,16 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search,  scrape_url
 
-load_dotenv()
+# override=True so editing .env actually takes effect on the next restart, even
+# if a stale value is already present in the environment.
+load_dotenv(override=True)
 
-llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.7)
+# Groq enforces its token-per-day limit per organization *per model*, so if one
+# model is exhausted you can switch here (e.g. llama-3.1-8b-instant) and keep
+# working instead of waiting for the quota window to roll over.
+MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+
+llm = ChatGroq(model=MODEL, temperature=0.7)
 
 # 1st agent
 def build_search_agent():

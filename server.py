@@ -1,0 +1,175 @@
+"""Web server for the Multi-Agent AI Research platform.
+
+Serves the frontend in `web/` and exposes a small JSON + SSE API so the browser
+can watch a research run happen agent by agent.
+
+    python server.py            # then open http://127.0.0.1:8000
+"""
+
+import asyncio
+import json
+import os
+import threading
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import PlainTextResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+
+from pipeline import STEPS, describe_error, run_research_pipeline
+
+load_dotenv()
+
+BASE_DIR = Path(__file__).parent
+WEB_DIR = BASE_DIR / "web"
+
+app = FastAPI(title="Multi-Agent AI Research", docs_url="/api/docs")
+
+# job_id -> {"topic", "status", "created_at", "state", "error", "events"}
+# `events` is append-only, so any number of SSE clients can follow (or re-follow)
+# a run just by tracking how far through the list they are.
+JOBS: dict[str, dict] = {}
+JOBS_LOCK = threading.Lock()
+
+
+class ResearchRequest(BaseModel):
+    topic: str
+
+
+def _run_job(job_id: str, topic: str):
+    """Execute the pipeline on a worker thread, recording events as they happen."""
+    job = JOBS[job_id]
+
+    try:
+        state = run_research_pipeline(topic, on_event=job["events"].append)
+        job["state"] = state
+        job["status"] = "complete"
+    except Exception as exc:
+        message = describe_error(exc)
+        job["status"] = "error"
+        job["error"] = message
+        job["events"].append({"type": "error", "message": message})
+    finally:
+        job["finished_at"] = datetime.now(timezone.utc).isoformat()
+
+
+@app.get("/api/health")
+def health():
+    """Let the UI warn about missing keys before someone waits on a doomed run."""
+    return {
+        "ok": True,
+        "keys": {
+            "tavily": bool(os.getenv("TAVILY_API_KEY")),
+            "groq": bool(os.getenv("GROQ_API_KEY")),
+        },
+        "steps": STEPS,
+    }
+
+
+@app.post("/api/research")
+def start_research(req: ResearchRequest):
+    topic = req.topic.strip()
+    if not topic:
+        raise HTTPException(status_code=400, detail="Please provide a research topic.")
+    if len(topic) > 500:
+        raise HTTPException(status_code=400, detail="That topic is too long (500 characters max).")
+
+    job_id = uuid.uuid4().hex[:12]
+    with JOBS_LOCK:
+        JOBS[job_id] = {
+            "id": job_id,
+            "topic": topic,
+            "status": "running",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "state": None,
+            "error": None,
+            "events": [],
+        }
+
+    threading.Thread(target=_run_job, args=(job_id, topic), daemon=True).start()
+    return {"job_id": job_id, "topic": topic}
+
+
+@app.get("/api/research/{job_id}/stream")
+async def stream_research(job_id: str):
+    """Server-sent events: replays anything already emitted, then follows live."""
+    job = JOBS.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Unknown job.")
+
+    async def event_source():
+        cursor = 0
+        idle = 0
+        while True:
+            # Sample status *before* draining: if the job finishes mid-drain we
+            # still come back for one more pass and pick up its final events.
+            running = job["status"] == "running"
+            events = job["events"]
+            # Anything appended since our last pass, including a full replay on
+            # the first iteration so late/reconnecting clients miss nothing.
+            while cursor < len(events):
+                yield f"data: {json.dumps(events[cursor])}\n\n"
+                cursor += 1
+                idle = 0
+
+            if not running:
+                break
+
+            idle += 1
+            if idle > 100:  # ~20s quiet: nudge proxies so they don't drop us
+                yield ": keep-alive\n\n"
+                idle = 0
+            await asyncio.sleep(0.2)
+
+        yield "data: {\"type\": \"eof\"}\n\n"
+
+    return StreamingResponse(
+        event_source(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
+@app.get("/api/research/{job_id}")
+def get_research(job_id: str):
+    job = JOBS.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Unknown job.")
+    return {k: v for k, v in job.items() if k not in ("queue", "events")}
+
+
+@app.get("/api/research/{job_id}/report.md", response_class=PlainTextResponse)
+def download_report(job_id: str):
+    job = JOBS.get(job_id)
+    if not job or not job.get("state"):
+        raise HTTPException(status_code=404, detail="No report available for that job.")
+
+    state = job["state"]
+    markdown = (
+        f"# {job['topic']}\n\n"
+        f"_Generated by Multi-Agent AI Research on {job['created_at'][:10]}_\n\n"
+        f"{state.get('report', '')}\n\n---\n\n## Critic Review\n\n{state.get('feedback', '')}\n"
+    )
+    slug = "".join(c if c.isalnum() else "-" for c in job["topic"]).strip("-")[:60] or "report"
+    return PlainTextResponse(
+        markdown,
+        media_type="text/markdown",
+        headers={"Content-Disposition": f'attachment; filename="{slug}.md"'},
+    )
+
+
+# Serve web/ from the root so index.html's relative asset paths resolve both
+# here and when the file is opened straight from disk. Mounted last: the /api
+# routes above are matched first.
+app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    print("\n  Multi-Agent AI Research  ->  http://127.0.0.1:8000\n")
+    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
