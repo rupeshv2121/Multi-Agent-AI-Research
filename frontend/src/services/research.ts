@@ -2,7 +2,7 @@ import { api, API_BASE } from './client'
 import type { HealthResponse, Job, StartResearchResponse } from '@/types'
 
 /**
- * Thin wrappers over the endpoints server.py actually exposes:
+ * Thin wrappers over the endpoints backend/server.py actually exposes:
  *   GET  /api/health
  *   POST /api/research
  *   GET  /api/research/{id}

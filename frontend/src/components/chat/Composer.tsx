@@ -42,7 +42,7 @@ const MODES: Array<{ id: SearchMode; label: string; icon: typeof Globe }> = [
   { id: 'hybrid', label: 'Hybrid', icon: Layers },
 ]
 
-const MAX_LENGTH = 500 // server.py rejects anything longer
+const MAX_LENGTH = 500 // backend/server.py rejects anything longer
 
 export function Composer() {
   const [value, setValue] = useState('')

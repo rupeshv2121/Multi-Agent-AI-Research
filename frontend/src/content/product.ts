@@ -2,7 +2,7 @@
  * Factual product content.
  *
  * Unlike `placeholders.ts`, everything here describes what the software
- * actually does — the four pipeline stages from `pipeline.py`, the real
+ * actually does — the four pipeline stages from `backend/pipeline.py`, the real
  * dependencies, and features that exist in the workspace. Keep it that way:
  * anything aspirational belongs in the roadmap, not on the page.
  */
@@ -28,7 +28,7 @@ import {
 } from 'lucide-react'
 
 /* -------------------------------------------------------------------------- */
-/*  The real pipeline — mirrors STEPS in pipeline.py                          */
+/*  The real pipeline — mirrors STEPS in backend/pipeline.py                  */
 /* -------------------------------------------------------------------------- */
 
 export interface AgentSpec {

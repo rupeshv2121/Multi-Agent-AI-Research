@@ -1,9 +1,9 @@
 """Web server for the Multi-Agent AI Research platform.
 
-Serves the frontend in `web/` and exposes a small JSON + SSE API so the browser
-can watch a research run happen agent by agent.
+Serves the built React app in `frontend/dist/` and exposes a small JSON + SSE
+API so the browser can watch a research run happen agent by agent.
 
-    python server.py            # then open http://127.0.0.1:8000
+    python backend/server.py        # then open http://127.0.0.1:8000
 """
 
 import asyncio
@@ -24,13 +24,19 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from pipeline import STEPS, describe_error, run_research_pipeline
 
-load_dotenv()
-
 BASE_DIR = Path(__file__).parent
-WEB_DIR = BASE_DIR / "web"
-# The React app (frontend/) builds to dist/. When it has been built we serve it
-# instead of the plain web/ page; `npm run build` in frontend/ is all it takes.
-DIST_DIR = BASE_DIR / "frontend" / "dist"
+ROOT_DIR = BASE_DIR.parent
+
+# .env lives at the repository root, shared by the backend and any tooling.
+# Passing the path explicitly means the server behaves the same whether it is
+# started from the root, from backend/, or by an editor with its own cwd.
+load_dotenv(ROOT_DIR / ".env")
+
+# The React app builds to frontend/dist; `npm run build` in frontend/ is all it
+# takes. WEB_DIR is the original no-build page, kept as a fallback for checkouts
+# that still have it.
+WEB_DIR = ROOT_DIR / "web"
+DIST_DIR = ROOT_DIR / "frontend" / "dist"
 
 app = FastAPI(title="Multi-Agent AI Research", docs_url="/api/docs")
 

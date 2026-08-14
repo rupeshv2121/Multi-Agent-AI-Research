@@ -86,7 +86,7 @@ export default function SettingsPage() {
                 <p className="text-[12px] leading-relaxed text-ink-muted">
                   {!online ? (
                     <>
-                      Start the backend with <code className="rounded bg-white/10 px-1">python server.py</code> from
+                      Start the backend with <code className="rounded bg-white/10 px-1">python backend/server.py</code> from
                       the project root — it listens on port 8000.
                     </>
                   ) : (

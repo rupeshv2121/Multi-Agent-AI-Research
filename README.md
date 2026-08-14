@@ -21,7 +21,7 @@ GROQ_API_KEY=...
 Install dependencies:
 
 ```bash
-uv pip install -r requirements.txt     # or: pip install -r requirements.txt
+uv pip install -r backend/requirements.txt     # or: pip install -r backend/requirements.txt
 ```
 
 ## Run the website
@@ -30,7 +30,7 @@ Build the React interface once, then start the server:
 
 ```bash
 cd frontend && npm install && npm run build && cd ..
-python server.py
+python backend/server.py
 ```
 
 Then open <http://127.0.0.1:8000>. The landing page is at `/`; the research
@@ -38,7 +38,7 @@ workspace is at `/app`. Enter a topic and each agent reports its status live as
 it works — the page follows the run over server-sent events, with a pipeline
 graph, per-agent timings and a live log feed alongside.
 
-`server.py` serves `frontend/dist`. If you start it before building, the API at
+`backend/server.py` serves `frontend/dist`. If you start it before building, the API at
 `/api` still runs and the root path returns the build instructions rather than
 crashing. See [frontend/README.md](frontend/README.md) for the dev-server
 workflow and for which features are backed by the API versus stored in the
@@ -63,24 +63,28 @@ under *Recent research* (stored in your browser only).
 ## Other entry points
 
 ```bash
-python pipeline.py     # CLI: prompts for a topic, prints each stage
-streamlit run Streamlit.py
+python backend/pipeline.py           # CLI: prompts for a topic, prints each stage
+streamlit run backend/Streamlit.py
 ```
 
 ## Layout
 
 ```
-server.py       FastAPI app — JSON + SSE API, serves the frontend
-pipeline.py     The four-step run, emits progress events
-agents.py       Agent + chain definitions
-tools.py        web_search and scrape_url
-frontend/       React + TypeScript interface (see frontend/README.md)
+backend/
+  server.py       FastAPI app — JSON + SSE API, serves the frontend
+  pipeline.py     The four-step run, emits progress events
+  agents.py       Agent + chain definitions
+  tools.py        web_search and scrape_url
+  Streamlit.py    Alternative Streamlit UI
+  requirements.txt
+frontend/         React + TypeScript interface (see frontend/README.md)
+.env              API keys, shared by everything above
 ```
 
 ## Troubleshooting
 
 **"Could not reach the research server"** — the agents run server-side, so
-`python server.py` must be running. Browse to <http://127.0.0.1:8000>, or to
+`python backend/server.py` must be running. Browse to <http://127.0.0.1:8000>, or to
 <http://localhost:5173> if you are using the Vite dev server.
 
 **The root path returns build instructions** — `frontend/dist` is missing. Run
@@ -99,6 +103,6 @@ quota errors are not retried, since they can't clear.
 - The reader step is treated as optional: if a scrape or tool call fails, the
   run is marked *skipped* for that agent and still produces a report from the
   search results rather than failing outright.
-- Runs are held in server memory, so restarting `server.py` clears history
+- Runs are held in server memory, so restarting the server clears history
   replay (the browser then simply re-runs the topic).
 - Reports are AI-generated — check the sources before relying on them.

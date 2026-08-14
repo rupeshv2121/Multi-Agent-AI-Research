@@ -20,7 +20,7 @@ export function toMessage(error: unknown): string {
     if (typeof detail === 'string') return detail
     if (error.code === 'ECONNABORTED') return 'The request timed out.'
     if (!error.response) {
-      return 'Could not reach the research server. Is `python server.py` running on port 8000?'
+      return 'Could not reach the research server. Is `python backend/server.py` running on port 8000?'
     }
     return error.message
   }

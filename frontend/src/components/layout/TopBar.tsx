@@ -100,7 +100,7 @@ export function TopBar() {
         )}
 
         <Tooltip
-          label={online ? 'Connected to the research server' : 'Cannot reach the server — is `python server.py` running?'}
+          label={online ? 'Connected to the research server' : 'Cannot reach the server — is `python backend/server.py` running?'}
           side="bottom"
         >
           <span

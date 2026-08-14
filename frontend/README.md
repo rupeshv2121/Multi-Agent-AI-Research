@@ -1,9 +1,9 @@
 # Multi-Agent AI Research — Frontend
 
-A React interface for the Python research pipeline in the repository root: a marketing
+A React interface for the Python research pipeline in `backend/`: a marketing
 landing page at `/` and the research workspace at `/app`. The workspace drives the real
 backend — every agent status, timing, source and score on screen comes from the SSE
-stream that `pipeline.py` emits.
+stream that `backend/pipeline.py` emits.
 
 ## Running it
 
@@ -12,19 +12,19 @@ one process:
 
 ```bash
 cd frontend && npm install && npm run build
-cd .. && python server.py          # http://127.0.0.1:8000
+cd .. && python backend/server.py  # http://127.0.0.1:8000
 ```
 
 For frontend work, run the Vite dev server alongside it — `/api` is proxied to port
-8000, and `server.py` allows the dev origin via CORS:
+8000, and `backend/server.py` allows the dev origin via CORS:
 
 ```bash
-python server.py                   # terminal 1
+python backend/server.py           # terminal 1
 cd frontend && npm run dev         # terminal 2 -> http://localhost:5173
 ```
 
-`server.py` falls back to the original `web/` page when `frontend/dist` is absent, so
-the project still runs with no Node toolchain installed.
+If you start the server before building, the JSON API at `/api` still runs and the
+root path returns the build instructions rather than crashing.
 
 ## Routes
 
@@ -36,7 +36,7 @@ the project still runs with no Node toolchain installed.
 | `/app/library` | Saved research, filterable |
 | `/app/settings` | Backend health, motion and accent preferences |
 
-Deep links work on a hard refresh: `server.py` serves `index.html` for unknown paths
+Deep links work on a hard refresh: the server returns `index.html` for unknown paths
 so the client router can take over, while genuinely missing `/assets/*` still 404.
 
 ## ⚠️ Before you publish the landing page
@@ -57,7 +57,7 @@ wall, and the newsletter form says plainly that it is not connected to a list.
 
 | Feature | Source |
 |---|---|
-| Agent roster, names, roles | `GET /api/health` → `STEPS` in `pipeline.py` |
+| Agent roster, names, roles | `GET /api/health` → `STEPS` in `backend/pipeline.py` |
 | Live agent status, timings, retries | SSE `step` events |
 | Log feed | SSE `log` events |
 | Sources | SSE `sources` events |
@@ -74,7 +74,7 @@ agent cards are built from whatever `/api/health` returns, so adding a stage to
 These are real features, but they are not backed by an endpoint — the backend has
 none for them. Each one says so in the interface rather than implying otherwise:
 
-- **History, Library, Dashboard metrics** — `server.py` keeps jobs in an in-process
+- **History, Library, Dashboard metrics** — the backend keeps jobs in an in-process
   dict with no history endpoint, so everything is recorded in `localStorage` by
   `services/storage.ts`.
 - **Research depth / search mode / agent selection** — shape the UI only;

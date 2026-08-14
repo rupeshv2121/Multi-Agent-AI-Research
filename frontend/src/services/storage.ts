@@ -3,7 +3,7 @@ import type { Conversation } from '@/types'
 /**
  * Conversation history lives in the browser.
  *
- * server.py keeps jobs in an in-process dict with no history endpoint and no
+ * backend/server.py keeps jobs in an in-process dict with no history endpoint and no
  * persistence across restarts, so there is nothing to fetch. Everything the
  * sidebar and dashboard show is rebuilt from what this client recorded. Swap
  * this module for HTTP calls if a `/api/history` endpoint is ever added.

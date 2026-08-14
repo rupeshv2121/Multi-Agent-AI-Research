@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from langchain.agents import create_agent
 from dotenv import load_dotenv
@@ -7,9 +8,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search,  scrape_url
 
+# .env sits at the repository root, one level above this package. Passing the
+# path explicitly keeps the lookup independent of the working directory.
 # override=True so editing .env actually takes effect on the next restart, even
 # if a stale value is already present in the environment.
-load_dotenv(override=True)
+load_dotenv(Path(__file__).parent.parent / ".env", override=True)
 
 # Groq enforces its token-per-day limit per organization *per model*, so if one
 # model is exhausted you can switch here (e.g. llama-3.1-8b-instant) and keep
