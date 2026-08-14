@@ -26,12 +26,21 @@ uv pip install -r requirements.txt     # or: pip install -r requirements.txt
 
 ## Run the website
 
+Build the React interface once, then start the server:
+
 ```bash
+cd frontend && npm install && npm run build && cd ..
 python server.py
 ```
 
 Then open <http://127.0.0.1:8000>. Enter a topic and each agent reports its
-status live as it works — the page follows the run over server-sent events.
+status live as it works — the page follows the run over server-sent events,
+with a pipeline graph, per-agent timings and a live log feed alongside.
+
+`server.py` serves `frontend/dist` when it exists and falls back to the plain
+`web/` page otherwise, so the project still runs without a Node toolchain. See
+[frontend/README.md](frontend/README.md) for the dev-server workflow and for
+which features are backed by the API versus stored in the browser.
 
 When the run finishes you get:
 
@@ -57,7 +66,8 @@ server.py       FastAPI app — JSON + SSE API, serves the frontend
 pipeline.py     The four-step run, emits progress events
 agents.py       Agent + chain definitions
 tools.py        web_search and scrape_url
-web/            index.html · style.css · app.js  (no build step)
+frontend/       React + TypeScript interface (see frontend/README.md)
+web/            index.html · style.css · app.js  — fallback, no build step
 ```
 
 ## Troubleshooting

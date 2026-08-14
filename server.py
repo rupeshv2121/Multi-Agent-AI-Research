@@ -16,9 +16,11 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from pipeline import STEPS, describe_error, run_research_pipeline
 
@@ -26,8 +28,20 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).parent
 WEB_DIR = BASE_DIR / "web"
+# The React app (frontend/) builds to dist/. When it has been built we serve it
+# instead of the plain web/ page; `npm run build` in frontend/ is all it takes.
+DIST_DIR = BASE_DIR / "frontend" / "dist"
 
 app = FastAPI(title="Multi-Agent AI Research", docs_url="/api/docs")
+
+# Only needed while the React dev server proxies from its own origin. The
+# built app is served from this same origin, where CORS does not apply.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # job_id -> {"topic", "status", "created_at", "state", "error", "events"}
 # `events` is append-only, so any number of SSE clients can follow (or re-follow)
@@ -162,10 +176,37 @@ def download_report(job_id: str):
     )
 
 
-# Serve web/ from the root so index.html's relative asset paths resolve both
-# here and when the file is opened straight from disk. Mounted last: the /api
-# routes above are matched first.
-app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")
+class SPAStaticFiles(StaticFiles):
+    """StaticFiles that serves index.html for unknown paths.
+
+    The React app routes /dashboard, /library and /settings on the client, so a
+    hard refresh on one of those asks the server for a file that does not
+    exist. `html=True` alone only covers directories, so a missing *file* still
+    404s — this turns that into the app shell and lets the router take over.
+    Genuinely missing assets (a stale /assets/... hash) keep their 404.
+    """
+
+    async def get_response(self, path: str, scope):
+        try:
+            return await super().get_response(path, scope)
+        except StarletteHTTPException as exc:
+            # Starlette *raises* on a miss rather than returning a 404 response.
+            # `path` has already been through os.path.normpath, so on Windows
+            # it arrives with backslashes — normalise before matching.
+            normalised = path.replace("\\", "/").lstrip("/")
+            if exc.status_code != 404 or normalised.startswith("assets/"):
+                raise
+            return await super().get_response("index.html", scope)
+
+
+# Serve the frontend from the root. Mounted last, so the /api routes above are
+# matched first. Prefers the built React app; falls back to the original web/
+# page when frontend/dist does not exist, so the project still runs with no
+# Node toolchain installed.
+if DIST_DIR.is_dir():
+    app.mount("/", SPAStaticFiles(directory=DIST_DIR, html=True), name="app")
+else:
+    app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")
 
 
 if __name__ == "__main__":
