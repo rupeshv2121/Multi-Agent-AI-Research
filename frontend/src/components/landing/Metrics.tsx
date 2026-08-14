@@ -1,9 +1,28 @@
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import CountUp from 'react-countup'
+import { useRef, type ComponentType } from 'react'
+import * as countUpModule from 'react-countup'
+import type { CountUpProps } from 'react-countup'
 import { Reveal, Section } from './Section'
 import { IS_PLACEHOLDER_CONTENT, METRICS } from '@/content/placeholders'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+
+/**
+ * `react-countup` ships a UMD/CommonJS build. Vite's dep pre-bundling wraps it
+ * as `export default require_build()`, so a plain default import yields the
+ * module's exports object rather than the component — which React rejects with
+ * "Element type is invalid ... got: object". Unwrap `.default` until we reach
+ * the callable so the same code works in dev, in the production build, and if
+ * the interop is ever fixed upstream.
+ */
+function resolveComponent<P>(mod: unknown): ComponentType<P> {
+  let candidate: unknown = mod
+  while (candidate && typeof candidate !== 'function' && typeof candidate === 'object' && 'default' in candidate) {
+    candidate = (candidate as { default: unknown }).default
+  }
+  return candidate as ComponentType<P>
+}
+
+const CountUp = resolveComponent<CountUpProps>(countUpModule)
 
 /**
  * Animated counters.
