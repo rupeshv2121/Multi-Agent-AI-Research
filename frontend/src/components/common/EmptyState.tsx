@@ -18,7 +18,7 @@ export function EmptyState({ icon: Icon, title, description, action }: EmptyStat
       className="flex flex-col items-center justify-center gap-3 px-6 py-12 text-center"
     >
       <div className="relative mb-1">
-        <div className="absolute inset-0 rounded-2xl bg-accent-blue/15 blur-xl" aria-hidden />
+        <div className="absolute inset-0 rounded-2xl bg-accent-primary/15 blur-xl" aria-hidden />
         <div className="relative grid h-12 w-12 place-items-center rounded-2xl border border-hairline bg-white/[0.04]">
           <Icon className="h-5 w-5 text-ink-muted" aria-hidden />
         </div>

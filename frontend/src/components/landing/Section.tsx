@@ -78,7 +78,7 @@ export function SectionHeading({
             'px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink-muted backdrop-blur-xl',
           )}
         >
-          <span className="h-1 w-1 rounded-full bg-accent-blue" aria-hidden />
+          <span className="h-1 w-1 rounded-full bg-accent-primary" aria-hidden />
           {eyebrow}
         </span>
       )}

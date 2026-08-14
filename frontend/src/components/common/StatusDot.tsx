@@ -3,7 +3,7 @@ import type { AgentStatus } from '@/types'
 
 export const STATUS_STYLES: Record<AgentStatus, { dot: string; text: string; ring: string; label: string }> = {
   idle: { dot: 'bg-white/25', text: 'text-ink-faint', ring: 'ring-white/10', label: 'Waiting' },
-  running: { dot: 'bg-accent-blue', text: 'text-accent-blue', ring: 'ring-accent-blue/40', label: 'Running' },
+  running: { dot: 'bg-accent-primary', text: 'text-accent-primary', ring: 'ring-accent-primary/40', label: 'Running' },
   done: { dot: 'bg-accent-emerald', text: 'text-accent-emerald', ring: 'ring-accent-emerald/40', label: 'Complete' },
   warn: { dot: 'bg-accent-amber', text: 'text-accent-amber', ring: 'ring-accent-amber/40', label: 'Skipped' },
   error: { dot: 'bg-accent-rose', text: 'text-accent-rose', ring: 'ring-accent-rose/40', label: 'Failed' },

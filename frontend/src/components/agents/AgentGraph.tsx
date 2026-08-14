@@ -59,7 +59,7 @@ function buildEdges(agents: AgentRuntime[], reduced: boolean): Edge[] {
     const passed = agent.status === 'done' || agent.status === 'warn'
     const flowing = passed && next.status === 'running'
 
-    const color = flowing ? '#3B82F6' : passed ? '#10B981' : 'rgba(255,255,255,0.10)'
+    const color = flowing ? '#F97316' : passed ? '#10B981' : 'rgba(255,255,255,0.10)'
 
     return {
       id: `${agent.id}->${next.id}`,
@@ -70,7 +70,7 @@ function buildEdges(agents: AgentRuntime[], reduced: boolean): Edge[] {
       style: {
         stroke: color,
         strokeWidth: flowing ? 2 : 1.5,
-        filter: flowing ? 'drop-shadow(0 0 6px rgba(59,130,246,0.7))' : undefined,
+        filter: flowing ? 'drop-shadow(0 0 6px rgba(249,115,22,0.7))' : undefined,
         transition: 'stroke 0.5s ease',
       },
       markerEnd: {

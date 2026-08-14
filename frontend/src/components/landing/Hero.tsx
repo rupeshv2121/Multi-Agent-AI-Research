@@ -49,13 +49,13 @@ export function Hero() {
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-canvas" />
 
-        <div className="absolute -left-40 top-[-15%] h-[620px] w-[620px] animate-float rounded-full bg-accent-blue/[0.16] blur-[130px]" />
+        <div className="absolute -left-40 top-[-15%] h-[620px] w-[620px] animate-float rounded-full bg-accent-primary/[0.16] blur-[130px]" />
         <div
-          className="absolute -right-32 top-[8%] h-[560px] w-[560px] animate-float rounded-full bg-accent-purple/[0.15] blur-[140px]"
+          className="absolute -right-32 top-[8%] h-[560px] w-[560px] animate-float rounded-full bg-accent-secondary/[0.15] blur-[140px]"
           style={{ animationDelay: '-3s' }}
         />
         <div
-          className="absolute bottom-[-25%] left-1/3 h-[600px] w-[600px] animate-float rounded-full bg-accent-cyan/[0.11] blur-[150px]"
+          className="absolute bottom-[-25%] left-1/3 h-[600px] w-[600px] animate-float rounded-full bg-accent-tertiary/[0.11] blur-[150px]"
           style={{ animationDelay: '-6s' }}
         />
 
@@ -98,7 +98,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.05 }}
           className="group mb-7 inline-flex items-center gap-2 rounded-full border border-hairline bg-white/[0.04] py-1.5 pl-2 pr-3.5 text-[12px] backdrop-blur-xl transition-colors hover:border-white/20"
         >
-          <span className="rounded-full bg-gradient-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider">
+          <span className="rounded-full bg-gradient-accent px-2 py-0.5 text-canvas text-[10px] font-semibold uppercase tracking-wider">
             New
           </span>
           <span className="text-ink-muted transition-colors group-hover:text-ink">
@@ -151,7 +151,7 @@ export function Hero() {
         >
           <div className="gradient-border group relative rounded-2xl bg-surface/60 p-1.5 shadow-lift backdrop-blur-2xl">
             <div className="flex items-center gap-2">
-              <Sparkles className="ml-3 h-4 w-4 shrink-0 text-accent-blue" aria-hidden />
+              <Sparkles className="ml-3 h-4 w-4 shrink-0 text-accent-primary" aria-hidden />
               <label htmlFor="hero-topic" className="sr-only">
                 Research topic
               </label>

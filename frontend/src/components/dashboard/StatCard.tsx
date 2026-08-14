@@ -18,9 +18,9 @@ interface StatCardProps {
 }
 
 const ACCENTS = {
-  blue: 'text-accent-blue bg-accent-blue/10 border-accent-blue/20',
-  purple: 'text-accent-purple bg-accent-purple/10 border-accent-purple/20',
-  cyan: 'text-accent-cyan bg-accent-cyan/10 border-accent-cyan/20',
+  blue: 'text-accent-primary bg-accent-primary/10 border-accent-primary/20',
+  purple: 'text-accent-secondary bg-accent-secondary/10 border-accent-secondary/20',
+  cyan: 'text-accent-tertiary bg-accent-tertiary/10 border-accent-tertiary/20',
   emerald: 'text-accent-emerald bg-accent-emerald/10 border-accent-emerald/20',
 }
 

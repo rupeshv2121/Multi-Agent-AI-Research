@@ -10,9 +10,9 @@ import { cn } from '@/utils/cn'
 import { stagger, fadeUp } from '@/animations/variants'
 
 const ACCENTS: Array<{ id: AccentPreset; label: string; swatch: string }> = [
-  { id: 'blue', label: 'Signal', swatch: 'bg-accent-blue' },
-  { id: 'purple', label: 'Nebula', swatch: 'bg-accent-purple' },
-  { id: 'cyan', label: 'Lagoon', swatch: 'bg-accent-cyan' },
+  { id: 'blue', label: 'Signal', swatch: 'bg-accent-primary' },
+  { id: 'purple', label: 'Nebula', swatch: 'bg-accent-secondary' },
+  { id: 'cyan', label: 'Lagoon', swatch: 'bg-accent-tertiary' },
   { id: 'emerald', label: 'Verdant', swatch: 'bg-accent-emerald' },
 ]
 
@@ -123,7 +123,7 @@ export default function SettingsPage() {
                 >
                   <span className={cn('h-3 w-3 rounded-full', option.swatch)} />
                   {option.label}
-                  {accent === option.id && <Check className="h-3 w-3 text-accent-blue" />}
+                  {accent === option.id && <Check className="h-3 w-3 text-accent-primary" />}
                 </button>
               ))}
             </div>
@@ -254,11 +254,11 @@ function Toggle({
       onClick={() => onChange(!checked)}
       className={cn(
         'relative h-6 w-11 shrink-0 rounded-full border transition-colors',
-        checked ? 'border-accent-blue/40 bg-accent-blue/30' : 'border-hairline bg-white/[0.06]',
+        checked ? 'border-accent-primary/40 bg-accent-primary/30' : 'border-hairline bg-white/[0.06]',
       )}
     >
       <motion.span
-        className={cn('absolute top-1/2 h-4 w-4 rounded-full', checked ? 'bg-accent-blue' : 'bg-white/40')}
+        className={cn('absolute top-1/2 h-4 w-4 rounded-full', checked ? 'bg-accent-primary' : 'bg-white/40')}
         animate={{ left: checked ? 24 : 4, y: '-50%' }}
         transition={{ type: 'spring', stiffness: 500, damping: 32 }}
       />

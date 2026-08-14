@@ -7,7 +7,7 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --ring: 59 130 246;
+    --ring: 249 115 22;
   }
 
   * {
@@ -43,7 +43,7 @@
   }
 
   ::selection {
-    background: rgba(168, 85, 247, 0.35);
+    background: rgba(249, 115, 22, 0.32);
   }
 
   ::-webkit-scrollbar {
@@ -87,9 +87,9 @@
     padding: 1px;
     background: linear-gradient(
       135deg,
-      rgba(59, 130, 246, 0.5),
-      rgba(168, 85, 247, 0.35),
-      rgba(34, 211, 238, 0.5)
+      rgba(249, 115, 22, 0.5),
+      rgba(239, 68, 68, 0.35),
+      rgba(251, 191, 36, 0.5)
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,

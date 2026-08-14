@@ -130,7 +130,7 @@ export default function LibraryPage() {
                     <button onClick={() => open(conversation.id)} className="flex-1 text-left">
                       <div className="flex items-start gap-2">
                         <h3 className="min-w-0 flex-1 text-sm font-semibold leading-snug">{conversation.title}</h3>
-                        {conversation.pinned && <Pin className="mt-0.5 h-3 w-3 shrink-0 text-accent-blue" />}
+                        {conversation.pinned && <Pin className="mt-0.5 h-3 w-3 shrink-0 text-accent-primary" />}
                       </div>
                       <p className="mt-1.5 line-clamp-2 text-[12px] leading-relaxed text-ink-muted">
                         {conversation.topic}
@@ -226,7 +226,7 @@ function IconAction({
         danger
           ? 'text-ink-faint hover:bg-accent-rose/15 hover:text-accent-rose'
           : 'text-ink-faint hover:bg-white/[0.08] hover:text-ink',
-        active && !danger && 'text-accent-blue',
+        active && !danger && 'text-accent-primary',
       )}
     >
       {children}

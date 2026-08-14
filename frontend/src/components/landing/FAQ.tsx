@@ -51,7 +51,7 @@ export function FAQ() {
                       className={cn(
                         'grid h-7 w-7 shrink-0 place-items-center rounded-lg border transition-colors',
                         expanded
-                          ? 'border-accent-blue/30 bg-accent-blue/10 text-accent-blue'
+                          ? 'border-accent-primary/30 bg-accent-primary/10 text-accent-primary'
                           : 'border-hairline text-ink-faint',
                       )}
                       aria-hidden

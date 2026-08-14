@@ -13,13 +13,13 @@ export function FinalCTA() {
     <section className="relative overflow-hidden py-24 sm:py-32">
       {/* Aurora backdrop */}
       <div className="absolute inset-0" aria-hidden>
-        <div className="absolute left-1/2 top-1/2 h-[560px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-blue/[0.14] blur-[130px]" />
+        <div className="absolute left-1/2 top-1/2 h-[560px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-primary/[0.14] blur-[130px]" />
         <div
-          className="absolute left-1/3 top-1/3 h-[420px] w-[560px] animate-float rounded-full bg-accent-purple/[0.14] blur-[120px]"
+          className="absolute left-1/3 top-1/3 h-[420px] w-[560px] animate-float rounded-full bg-accent-secondary/[0.14] blur-[120px]"
           style={{ animationDelay: '-2s' }}
         />
         <div
-          className="absolute right-1/4 bottom-1/4 h-[380px] w-[500px] animate-float rounded-full bg-accent-cyan/[0.11] blur-[120px]"
+          className="absolute right-1/4 bottom-1/4 h-[380px] w-[500px] animate-float rounded-full bg-accent-tertiary/[0.11] blur-[120px]"
           style={{ animationDelay: '-5s' }}
         />
 

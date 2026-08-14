@@ -94,7 +94,7 @@ function AssistantMessage({ message, title }: MessageProps) {
 
         {streaming && !message.content ? (
           <div className="glass p-5">
-            <div className="mb-4 flex items-center gap-2 text-[13px] text-accent-blue">
+            <div className="mb-4 flex items-center gap-2 text-[13px] text-accent-primary">
               <Sparkles className="h-3.5 w-3.5" />
               <span>{phase}</span>
               <TypingDots className="ml-1" />
@@ -105,12 +105,12 @@ function AssistantMessage({ message, title }: MessageProps) {
           <>
             <article className="glass relative overflow-hidden p-5 sm:p-7">
               {/* Document header rail */}
-              <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-blue/50 to-transparent" aria-hidden />
+              <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-primary/50 to-transparent" aria-hidden />
 
               <Markdown content={revealed} />
 
               {isTyping && (
-                <span className="ml-0.5 inline-block h-4 w-[2px] animate-caret-blink bg-accent-blue align-middle" aria-hidden />
+                <span className="ml-0.5 inline-block h-4 w-[2px] animate-caret-blink bg-accent-primary align-middle" aria-hidden />
               )}
             </article>
 

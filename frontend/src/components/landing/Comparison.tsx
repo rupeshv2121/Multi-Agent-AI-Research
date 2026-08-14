@@ -36,7 +36,7 @@ export function Comparison() {
                     scope="col"
                     className={cn(
                       'px-4 py-4 text-center',
-                      column.highlight && 'relative bg-accent-blue/[0.06]',
+                      column.highlight && 'relative bg-accent-primary/[0.06]',
                     )}
                   >
                     {column.highlight && (
@@ -65,7 +65,7 @@ export function Comparison() {
                   {COLUMNS.map((column) => (
                     <td
                       key={column.key}
-                      className={cn('px-4 py-3.5 text-center', column.highlight && 'bg-accent-blue/[0.05]')}
+                      className={cn('px-4 py-3.5 text-center', column.highlight && 'bg-accent-primary/[0.05]')}
                     >
                       <Mark value={row[column.key]} strong={column.highlight} />
                     </td>

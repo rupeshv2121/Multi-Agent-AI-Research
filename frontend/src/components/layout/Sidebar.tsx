@@ -120,7 +120,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
             collapsed && 'justify-center px-0',
           )}
         >
-          <MessageSquarePlus className="h-4 w-4 shrink-0 text-accent-blue transition-transform group-hover:scale-110" />
+          <MessageSquarePlus className="h-4 w-4 shrink-0 text-accent-primary transition-transform group-hover:scale-110" />
           {!collapsed && <span className="flex-1 text-left">New research</span>}
           {!collapsed && <kbd className="text-[10px] text-ink-faint">⌘⇧O</kbd>}
         </button>
@@ -187,7 +187,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
           )}
           aria-label="Account"
         >
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-accent text-xs font-semibold">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-accent text-canvas text-xs font-semibold">
             R
           </span>
           {!collapsed && (
@@ -200,12 +200,15 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
         </button>
       </div>
 
-      {/* Expand affordance when collapsed */}
+      {/* Expand affordance when collapsed. The offset lives on the tooltip
+          wrapper, not the button: the wrapper is itself `relative`, so an
+          absolutely-positioned child would anchor to that inline span sitting
+          at the end of the column rather than to the rail. */}
       {collapsed && (
-        <Tooltip label="Expand sidebar  ⌘B" side="right">
+        <Tooltip label="Expand sidebar  ⌘B" side="right" wrapperClassName="absolute -right-3 top-20 z-30">
           <button
             onClick={toggleSidebar}
-            className="absolute -right-3 top-20 grid h-6 w-6 place-items-center rounded-full border border-hairline bg-surface-raised text-ink-faint transition-colors hover:text-ink"
+            className="grid h-6 w-6 place-items-center rounded-full border border-hairline bg-surface-raised text-ink-faint transition-colors hover:text-ink"
             aria-label="Expand sidebar"
           >
             <ChevronsLeft className="h-3 w-3 rotate-180" />
@@ -249,19 +252,21 @@ function NavItem({
           {isActive && (
             <motion.span
               layoutId="nav-active"
-              className="absolute inset-0 rounded-xl border border-accent-blue/25 bg-accent-blue/[0.12] shadow-glow-blue"
+              className="absolute inset-0 rounded-xl border border-accent-primary/25 bg-accent-primary/[0.12] shadow-glow-primary"
               transition={{ type: 'spring', stiffness: 380, damping: 32 }}
             />
           )}
-          <Icon className={cn('relative h-4 w-4 shrink-0', isActive && 'text-accent-blue')} />
+          <Icon className={cn('relative h-4 w-4 shrink-0', isActive && 'text-accent-primary')} />
           {!collapsed && <span className="relative">{label}</span>}
         </>
       )}
     </NavLink>
   )
 
+  // The wrapper has to be block-level: an inline-flex trigger lets the four
+  // collapsed nav items flow horizontally and wrap out of the 76px rail.
   return collapsed ? (
-    <Tooltip label={label} side="right">
+    <Tooltip label={label} side="right" wrapperClassName="block w-full">
       <span className="block w-full">{content}</span>
     </Tooltip>
   ) : (
@@ -335,7 +340,7 @@ function HistoryRow({
       {active && (
         <motion.span
           layoutId="history-active"
-          className="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-accent-blue"
+          className="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-accent-primary"
         />
       )}
       <button
@@ -412,7 +417,7 @@ function RowAction({
       className={cn(
         'grid h-6 w-6 place-items-center rounded-md transition-colors',
         danger ? 'text-ink-faint hover:bg-accent-rose/15 hover:text-accent-rose' : 'text-ink-faint hover:bg-white/10 hover:text-ink',
-        active && !danger && 'text-accent-blue',
+        active && !danger && 'text-accent-primary',
       )}
     >
       {children}

@@ -131,7 +131,7 @@ function ActionButton({
           'grid h-7 w-7 place-items-center rounded-lg transition-colors',
           'text-ink-faint hover:bg-white/[0.08] hover:text-ink',
           'disabled:pointer-events-none disabled:opacity-30',
-          highlight && 'bg-accent-blue/15 text-accent-blue hover:bg-accent-blue/20 hover:text-accent-blue',
+          highlight && 'bg-accent-primary/15 text-accent-primary hover:bg-accent-primary/20 hover:text-accent-primary',
         )}
       >
         <AnimatePresence mode="wait" initial={false}>

@@ -98,7 +98,7 @@ export function Footer() {
                         >
                           <span className="relative">
                             {link.label}
-                            <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-accent-blue transition-transform duration-300 group-hover:scale-x-100" />
+                            <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-accent-primary transition-transform duration-300 group-hover:scale-x-100" />
                           </span>
                         </a>
                       ) : (
@@ -108,7 +108,7 @@ export function Footer() {
                         >
                           <span className="relative">
                             {link.label}
-                            <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-accent-blue transition-transform duration-300 group-hover:scale-x-100" />
+                            <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-accent-primary transition-transform duration-300 group-hover:scale-x-100" />
                           </span>
                         </Link>
                       )}
@@ -161,7 +161,7 @@ function Newsletter() {
       <div
         className={cn(
           'flex items-center gap-1 rounded-xl border bg-white/[0.03] p-1 transition-colors',
-          'focus-within:border-accent-blue/40 border-hairline',
+          'focus-within:border-accent-primary/40 border-hairline',
         )}
       >
         <input
@@ -176,7 +176,7 @@ function Newsletter() {
           type="submit"
           whileTap={{ scale: 0.94 }}
           aria-label="Subscribe"
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-accent text-white"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-accent text-canvas"
         >
           {submitted ? <Check className="h-3.5 w-3.5" /> : <ArrowRight className="h-3.5 w-3.5" />}
         </motion.button>

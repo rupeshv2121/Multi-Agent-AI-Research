@@ -330,5 +330,5 @@ function cnStatus(status: string): string {
   const base = 'h-1.5 w-1.5 shrink-0 rounded-full '
   if (status === 'complete') return `${base}bg-accent-emerald`
   if (status === 'error') return `${base}bg-accent-rose`
-  return `${base}bg-accent-blue`
+  return `${base}bg-accent-primary`
 }

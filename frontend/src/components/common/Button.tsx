@@ -11,9 +11,12 @@ const button = cva(
   {
     variants: {
       variant: {
+        // A flat warm fill rather than the panning gradient + glow it used to
+        // carry: at this size the moving gradient read as noise, and dark ink
+        // on orange clears contrast where white on orange did not.
         primary:
-          'bg-gradient-accent bg-[length:200%_200%] text-white shadow-glow-blue hover:bg-[position:100%_50%] ' +
-          'transition-[background-position,box-shadow] duration-500',
+          'bg-accent-primary text-canvas hover:bg-accent-tertiary ' +
+          'shadow-[inset_0_1px_0_0_rgba(255,255,255,0.18)] duration-200',
         secondary: 'bg-white/[0.06] text-ink hover:bg-white/[0.10] border border-hairline',
         ghost: 'text-ink-muted hover:text-ink hover:bg-white/[0.06]',
         danger: 'bg-accent-rose/15 text-accent-rose hover:bg-accent-rose/25 border border-accent-rose/25',

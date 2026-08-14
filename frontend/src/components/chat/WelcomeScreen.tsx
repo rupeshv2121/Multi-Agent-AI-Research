@@ -44,7 +44,7 @@ export function WelcomeScreen() {
       className="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-10 text-center"
     >
       <motion.div variants={fadeUp} className="relative mb-6">
-        <div className="absolute inset-0 scale-150 rounded-full bg-accent-blue/20 blur-3xl" aria-hidden />
+        <div className="absolute inset-0 scale-150 rounded-full bg-accent-primary/20 blur-3xl" aria-hidden />
         <Logo className="relative h-14 w-14 rounded-2xl" />
       </motion.div>
 
@@ -64,7 +64,7 @@ export function WelcomeScreen() {
           return (
             <div key={agent.id} className="flex items-center gap-2">
               <span className="flex items-center gap-2 rounded-full border border-hairline bg-white/[0.04] px-3 py-1.5 text-[11px] font-medium">
-                <Icon className="h-3 w-3 text-accent-blue" />
+                <Icon className="h-3 w-3 text-accent-primary" />
                 {agent.name}
               </span>
               {index < agents.length - 1 && <ArrowRight className="h-3 w-3 text-ink-faint" />}
@@ -90,7 +90,7 @@ export function WelcomeScreen() {
               }
             }}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-accent-blue">{item.title}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-accent-primary">{item.title}</p>
             <p className="mt-1.5 text-[13px] leading-relaxed text-ink-muted">{item.prompt}</p>
           </Card>
         ))}

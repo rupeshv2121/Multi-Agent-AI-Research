@@ -1,14 +1,13 @@
 from langchain.tools import tool
 import requests
-from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from tavily import TavilyClient
 import os
-from pathlib import Path
 from rich import print
 
-# .env sits at the repository root, one level above this package.
-load_dotenv(Path(__file__).parent.parent / ".env")
+from env import load_env
+
+load_env()
 
 tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 

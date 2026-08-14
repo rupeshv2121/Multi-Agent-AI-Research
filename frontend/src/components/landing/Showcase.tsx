@@ -40,7 +40,7 @@ export function Showcase() {
         >
           {/* Ambient glow behind the frame */}
           <div
-            className="absolute -inset-x-10 -top-8 bottom-0 rounded-[40px] bg-gradient-to-r from-accent-blue/20 via-accent-purple/20 to-accent-cyan/20 blur-[70px]"
+            className="absolute -inset-x-10 -top-8 bottom-0 rounded-[40px] bg-gradient-to-r from-accent-primary/20 via-accent-secondary/20 to-accent-tertiary/20 blur-[70px]"
             aria-hidden
           />
 
@@ -68,7 +68,7 @@ export function Showcase() {
 
                 <div className="flex gap-2.5">
                   <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-gradient-accent">
-                    <Sparkles className="h-3 w-3 text-white" aria-hidden />
+                    <Sparkles className="h-3 w-3 text-canvas" aria-hidden />
                   </span>
 
                   <div className="min-w-0 flex-1 rounded-card border border-hairline bg-surface/60 p-4">

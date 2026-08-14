@@ -126,9 +126,9 @@ export function Composer() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="pointer-events-none absolute inset-0 z-10 grid place-items-center rounded-3xl border-2 border-dashed border-accent-blue/60 bg-accent-blue/10 backdrop-blur-sm"
+            className="pointer-events-none absolute inset-0 z-10 grid place-items-center rounded-3xl border-2 border-dashed border-accent-primary/60 bg-accent-primary/10 backdrop-blur-sm"
           >
-            <p className="text-sm font-medium text-accent-blue">Drop files to reference them</p>
+            <p className="text-sm font-medium text-accent-primary">Drop files to reference them</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -161,7 +161,7 @@ export function Composer() {
               style={{
                 padding: 1,
                 background:
-                  'linear-gradient(120deg, rgba(59,130,246,0.9), rgba(168,85,247,0.7), rgba(34,211,238,0.9), rgba(59,130,246,0.9))',
+                  'linear-gradient(120deg, rgba(249,115,22,0.9), rgba(239,68,68,0.7), rgba(251,191,36,0.9), rgba(249,115,22,0.9))',
                 backgroundSize: '300% 300%',
                 WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                 WebkitMaskComposite: 'xor',
@@ -384,7 +384,7 @@ export function Composer() {
                 className={cn(
                   'grid h-9 w-9 place-items-center rounded-xl transition-all duration-300',
                   value.trim()
-                    ? 'bg-gradient-accent text-white shadow-glow-blue'
+                    ? 'bg-accent-primary text-canvas hover:bg-accent-tertiary'
                     : 'bg-white/[0.06] text-ink-faint',
                 )}
                 aria-label="Start research"
@@ -461,7 +461,7 @@ function OptionRow({
       onClick={onClick}
       className={cn(
         'flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left transition-colors',
-        selected ? 'bg-accent-blue/[0.12] text-ink' : 'text-ink-muted hover:bg-white/[0.05] hover:text-ink',
+        selected ? 'bg-accent-primary/[0.12] text-ink' : 'text-ink-muted hover:bg-white/[0.05] hover:text-ink',
       )}
     >
       {Icon && <Icon className="h-3.5 w-3.5 shrink-0" />}
@@ -469,7 +469,7 @@ function OptionRow({
         <span className="block text-[12px] font-medium">{label}</span>
         {hint && <span className="block text-[10px] text-ink-faint">{hint}</span>}
       </span>
-      {selected && <Check className="h-3.5 w-3.5 shrink-0 text-accent-blue" />}
+      {selected && <Check className="h-3.5 w-3.5 shrink-0 text-accent-primary" />}
     </button>
   )
 }

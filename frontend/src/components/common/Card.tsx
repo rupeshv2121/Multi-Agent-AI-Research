@@ -54,7 +54,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-60 transition-opacity"
           style={{
-            background: `radial-gradient(340px circle at ${pointer.x}px ${pointer.y}px, rgba(99,102,241,0.10), transparent 70%)`,
+            background: `radial-gradient(340px circle at ${pointer.x}px ${pointer.y}px, rgba(249,115,22,0.10), transparent 70%)`,
           }}
         />
       )}

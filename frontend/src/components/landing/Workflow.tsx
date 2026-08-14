@@ -60,7 +60,7 @@ export function Workflow() {
         {/* Rail */}
         <div className="absolute left-[19px] top-2 h-[calc(100%-1rem)] w-px bg-white/[0.07]" aria-hidden />
         <motion.div
-          className="absolute left-[19px] top-2 w-px origin-top bg-gradient-to-b from-accent-blue via-accent-purple to-accent-emerald"
+          className="absolute left-[19px] top-2 w-px origin-top bg-gradient-to-b from-accent-primary via-accent-secondary to-accent-emerald"
           style={{ height: reduced ? '100%' : lineHeight }}
           aria-hidden
         />
@@ -115,7 +115,7 @@ function StepRow({
             Step {index + 1} of {total}
           </span>
           {step.kind === 'agent' && (
-            <span className="rounded-full border border-accent-blue/25 bg-accent-blue/[0.10] px-2 py-0.5 text-[10px] font-medium text-accent-blue">
+            <span className="rounded-full border border-accent-primary/25 bg-accent-primary/[0.10] px-2 py-0.5 text-[10px] font-medium text-accent-primary">
               Agent
             </span>
           )}

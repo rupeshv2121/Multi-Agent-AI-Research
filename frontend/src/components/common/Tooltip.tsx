@@ -7,7 +7,15 @@ interface TooltipProps {
   label: ReactNode
   children: ReactNode
   side?: 'top' | 'bottom' | 'left' | 'right'
+  /** Classes for the tooltip bubble. */
   className?: string
+  /**
+   * Classes for the trigger wrapper. The wrapper defaults to `inline-flex`,
+   * which is right for icon buttons sitting in a row but collapses a
+   * full-width trigger down to its content — pass `block w-full` when the
+   * child is meant to fill its container, as the collapsed sidebar nav does.
+   */
+  wrapperClassName?: string
 }
 
 const placement = {
@@ -21,13 +29,13 @@ const placement = {
  * Floating tooltip that appears on hover *and* keyboard focus, and is wired to
  * its trigger with aria-describedby so screen readers announce it too.
  */
-export function Tooltip({ label, children, side = 'top', className }: TooltipProps) {
+export function Tooltip({ label, children, side = 'top', className, wrapperClassName }: TooltipProps) {
   const [open, setOpen] = useState(false)
   const id = useId()
 
   return (
     <span
-      className="relative inline-flex"
+      className={cn('relative inline-flex', wrapperClassName)}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}

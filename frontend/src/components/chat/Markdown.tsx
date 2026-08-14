@@ -68,7 +68,7 @@ function MarkdownComponent({ content, className }: { content: string; className?
           ul: ({ children }) => <ul className="mb-4 space-y-1.5 pl-1">{children}</ul>,
           ol: ({ children }) => <ol className="mb-4 list-decimal space-y-1.5 pl-5 marker:text-ink-faint">{children}</ol>,
           li: ({ children }) => (
-            <li className="relative pl-5 before:absolute before:left-1 before:top-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-accent-blue/60 [ol>&]:pl-0 [ol>&]:before:hidden">
+            <li className="relative pl-5 before:absolute before:left-1 before:top-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-accent-primary/60 [ol>&]:pl-0 [ol>&]:before:hidden">
               {children}
             </li>
           ),
@@ -76,7 +76,7 @@ function MarkdownComponent({ content, className }: { content: string; className?
           em: ({ children }) => <em className="italic text-ink-muted">{children}</em>,
           hr: () => <hr className="my-8 border-hairline" />,
           blockquote: ({ children }) => (
-            <blockquote className="my-4 rounded-r-lg border-l-2 border-accent-purple/50 bg-white/[0.03] py-2 pl-4 pr-3 text-ink-muted">
+            <blockquote className="my-4 rounded-r-lg border-l-2 border-accent-secondary/50 bg-white/[0.03] py-2 pl-4 pr-3 text-ink-muted">
               {children}
             </blockquote>
           ),
@@ -85,7 +85,7 @@ function MarkdownComponent({ content, className }: { content: string; className?
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-baseline gap-0.5 break-words font-medium text-accent-cyan decoration-accent-cyan/30 underline-offset-2 transition-colors hover:text-accent-blue hover:underline"
+              className="group inline-flex items-baseline gap-0.5 break-words font-medium text-accent-tertiary decoration-accent-tertiary/30 underline-offset-2 transition-colors hover:text-accent-primary hover:underline"
             >
               {children}
               <ExternalLink className="h-2.5 w-2.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-70" />
@@ -120,7 +120,7 @@ function MarkdownComponent({ content, className }: { content: string; className?
             if (!language && !text.includes('\n')) {
               return (
                 <code
-                  className="rounded-md border border-hairline bg-white/[0.06] px-1.5 py-0.5 font-mono text-[0.85em] text-accent-cyan"
+                  className="rounded-md border border-hairline bg-white/[0.06] px-1.5 py-0.5 font-mono text-[0.85em] text-accent-tertiary"
                   {...props}
                 >
                   {children}

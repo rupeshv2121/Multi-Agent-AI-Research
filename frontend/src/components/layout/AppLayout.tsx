@@ -131,7 +131,7 @@ export function AppLayout() {
                       if (event.key === 'ArrowLeft') setAgentPanelWidth(agentPanelWidth + 24)
                       if (event.key === 'ArrowRight') setAgentPanelWidth(agentPanelWidth - 24)
                     }}
-                    className="absolute -left-1 top-0 z-20 h-full w-2 cursor-col-resize transition-colors hover:bg-accent-blue/30"
+                    className="absolute -left-1 top-0 z-20 h-full w-2 cursor-col-resize transition-colors hover:bg-accent-primary/30"
                   />
                   <AgentPanel className="h-full" />
                 </motion.div>

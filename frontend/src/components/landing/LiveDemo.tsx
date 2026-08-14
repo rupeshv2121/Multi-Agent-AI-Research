@@ -105,13 +105,13 @@ export function LiveDemo() {
           <div className="overflow-hidden rounded-[24px] border border-hairline bg-surface/50 backdrop-blur-2xl">
             {/* Query bar */}
             <div className="flex items-center gap-3 border-b border-hairline px-5 py-4">
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-gradient-accent text-[11px] font-semibold">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-gradient-accent text-canvas text-[11px] font-semibold">
                 Q
               </span>
               <p className="min-w-0 flex-1 truncate text-[14px]">
                 {typed || <span className="text-ink-faint">Waiting…</span>}
                 {typed.length < QUERY.length && phase < 0 && (
-                  <span className="ml-0.5 inline-block h-4 w-[2px] animate-caret-blink bg-accent-blue align-middle" />
+                  <span className="ml-0.5 inline-block h-4 w-[2px] animate-caret-blink bg-accent-primary align-middle" />
                 )}
               </p>
               <button
@@ -155,7 +155,7 @@ export function LiveDemo() {
                       className={cn(
                         'relative flex items-center gap-2.5 overflow-hidden rounded-xl border p-2.5 transition-colors duration-500',
                         status === 'running'
-                          ? 'border-accent-blue/35 bg-accent-blue/[0.07]'
+                          ? 'border-accent-primary/35 bg-accent-primary/[0.07]'
                           : status === 'done'
                             ? 'border-accent-emerald/25 bg-accent-emerald/[0.05]'
                             : 'border-hairline bg-white/[0.02]',
@@ -169,7 +169,7 @@ export function LiveDemo() {
                         className={cn(
                           'relative grid h-6 w-6 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.05]',
                           status === 'running'
-                            ? 'text-accent-blue'
+                            ? 'text-accent-primary'
                             : status === 'done'
                               ? 'text-accent-emerald'
                               : 'text-ink-faint',
@@ -193,7 +193,7 @@ export function LiveDemo() {
                         className={cn(
                           'relative shrink-0 text-[9px] font-medium uppercase tracking-wide',
                           status === 'running'
-                            ? 'text-accent-blue'
+                            ? 'text-accent-primary'
                             : status === 'done'
                               ? 'text-accent-emerald'
                               : 'text-ink-faint',

@@ -14,7 +14,6 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse, StreamingResponse
@@ -22,15 +21,14 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from env import load_env
 from pipeline import STEPS, describe_error, run_research_pipeline
 
 BASE_DIR = Path(__file__).parent
 ROOT_DIR = BASE_DIR.parent
 
-# .env lives at the repository root, shared by the backend and any tooling.
-# Passing the path explicitly means the server behaves the same whether it is
-# started from the root, from backend/, or by an editor with its own cwd.
-load_dotenv(ROOT_DIR / ".env")
+# See env.py: resolves backend/.env or the repository root, independent of cwd.
+load_env()
 
 # The React app builds to frontend/dist; `npm run build` in frontend/ is all it
 # takes. WEB_DIR is the original no-build page, kept as a fallback for checkouts

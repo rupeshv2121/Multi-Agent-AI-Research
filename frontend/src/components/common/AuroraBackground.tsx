@@ -135,9 +135,9 @@ export function AuroraBackground() {
     <div ref={container} className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden>
       <div className="absolute inset-0 bg-canvas" />
 
-      <div className="aurora-blob-1 absolute -left-40 -top-40 h-[560px] w-[560px] rounded-full bg-accent-blue/[0.13] blur-[120px]" />
-      <div className="aurora-blob-2 absolute -right-32 top-1/4 h-[520px] w-[520px] rounded-full bg-accent-purple/[0.12] blur-[130px]" />
-      <div className="aurora-blob-3 absolute -bottom-48 left-1/3 h-[600px] w-[600px] rounded-full bg-accent-cyan/[0.09] blur-[140px]" />
+      <div className="aurora-blob-1 absolute -left-40 -top-40 h-[560px] w-[560px] rounded-full bg-accent-primary/[0.10] blur-[120px]" />
+      <div className="aurora-blob-2 absolute -right-32 top-1/4 h-[520px] w-[520px] rounded-full bg-accent-secondary/[0.09] blur-[130px]" />
+      <div className="aurora-blob-3 absolute -bottom-48 left-1/3 h-[600px] w-[600px] rounded-full bg-accent-tertiary/[0.07] blur-[140px]" />
 
       {/* Fine grid, faded out toward the edges so it never reads as a border. */}
       <div

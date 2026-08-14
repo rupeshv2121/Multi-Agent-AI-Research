@@ -60,17 +60,17 @@ function PlanCard({ plan }: { plan: (typeof PLANS)[number] }) {
       className={cn(
         'relative flex h-full flex-col rounded-[24px] border p-6 backdrop-blur-2xl',
         plan.featured
-          ? 'gradient-border border-transparent bg-surface/70 shadow-glow-purple'
+          ? 'gradient-border border-transparent bg-surface/70 shadow-glow-secondary'
           : 'border-hairline bg-surface/40',
       )}
     >
       {plan.featured && (
         <>
           <span
-            className="pointer-events-none absolute -inset-6 -z-10 rounded-[36px] bg-accent-purple/20 blur-[50px]"
+            className="pointer-events-none absolute -inset-6 -z-10 rounded-[36px] bg-accent-secondary/20 blur-[50px]"
             aria-hidden
           />
-          <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider">
+          <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-accent px-3 py-1 text-canvas text-[10px] font-semibold uppercase tracking-wider">
             Most popular
           </span>
         </>
@@ -79,7 +79,7 @@ function PlanCard({ plan }: { plan: (typeof PLANS)[number] }) {
       <div className="mb-5">
         <h3 className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
           {plan.name}
-          {plan.featured && <Sparkles className="h-3.5 w-3.5 text-accent-purple" aria-hidden />}
+          {plan.featured && <Sparkles className="h-3.5 w-3.5 text-accent-secondary" aria-hidden />}
         </h3>
         <p className="mt-1.5 text-[12px] leading-relaxed text-ink-muted">{plan.description}</p>
       </div>
@@ -102,7 +102,7 @@ function PlanCard({ plan }: { plan: (typeof PLANS)[number] }) {
             <span
               className={cn(
                 'mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full',
-                plan.featured ? 'bg-accent-purple/20 text-accent-purple' : 'bg-white/[0.06] text-ink-muted',
+                plan.featured ? 'bg-accent-secondary/20 text-accent-secondary' : 'bg-white/[0.06] text-ink-muted',
               )}
             >
               <Check className="h-2.5 w-2.5" aria-hidden />

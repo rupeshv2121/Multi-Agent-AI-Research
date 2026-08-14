@@ -66,7 +66,7 @@ function FeatureCard({
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
-            background: `radial-gradient(360px circle at ${pointer.x}px ${pointer.y}px, rgba(99,102,241,0.13), transparent 65%)`,
+            background: `radial-gradient(360px circle at ${pointer.x}px ${pointer.y}px, rgba(249,115,22,0.13), transparent 65%)`,
           }}
         />
       )}

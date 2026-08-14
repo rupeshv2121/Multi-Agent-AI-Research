@@ -57,7 +57,7 @@ export function AgentPanel({ className }: { className?: string }) {
       <div className="shrink-0 border-b border-hairline px-4 pb-3 pt-4">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-sm font-semibold">
-            <GitBranch className="h-4 w-4 text-accent-purple" />
+            <GitBranch className="h-4 w-4 text-accent-secondary" />
             Agent pipeline
           </h2>
           <span className="text-[11px] tabular-nums text-ink-faint">

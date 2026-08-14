@@ -58,7 +58,7 @@ export function AgentConstellation() {
 
       <Reveal>
         <div className="relative overflow-hidden rounded-[28px] border border-hairline bg-surface/40 p-4 backdrop-blur-2xl sm:p-8">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.08),transparent_65%)]" aria-hidden />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.08),transparent_65%)]" aria-hidden />
 
           <div className="relative aspect-[5/3] w-full sm:aspect-[3.4/1]">
             <svg
@@ -69,8 +69,8 @@ export function AgentConstellation() {
             >
               <defs>
                 <linearGradient id="link-live" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#3B82F6" />
-                  <stop offset="100%" stopColor="#8B5CF6" />
+                  <stop offset="0%" stopColor="#F97316" />
+                  <stop offset="100%" stopColor="#EF4444" />
                 </linearGradient>
               </defs>
 
@@ -93,7 +93,7 @@ export function AgentConstellation() {
                       vectorEffect="non-scaling-stroke"
                       strokeLinecap="round"
                       className="transition-all duration-700"
-                      style={flowing ? { filter: 'drop-shadow(0 0 6px rgba(59,130,246,0.75))' } : undefined}
+                      style={flowing ? { filter: 'drop-shadow(0 0 6px rgba(249,115,22,0.75))' } : undefined}
                     />
 
                     {/* Particle riding the active link. */}
@@ -172,7 +172,7 @@ function ConstellationNode({
     <div className="absolute -translate-x-1/2 -translate-y-1/2" style={style}>
       {status === 'running' && !reduced && (
         <motion.span
-          className="absolute -inset-3 rounded-2xl bg-accent-blue/25 blur-xl"
+          className="absolute -inset-3 rounded-2xl bg-accent-primary/25 blur-xl"
           animate={{ opacity: [0.4, 0.9, 0.4], scale: [0.94, 1.08, 0.94] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden
@@ -185,7 +185,7 @@ function ConstellationNode({
         className={cn(
           'relative flex items-center gap-2 rounded-2xl border px-2.5 py-2 backdrop-blur-xl transition-colors duration-500 sm:px-3',
           status === 'running'
-            ? 'border-accent-blue/50 bg-accent-blue/[0.12]'
+            ? 'border-accent-primary/50 bg-accent-primary/[0.12]'
             : status === 'done'
               ? 'border-accent-emerald/40 bg-accent-emerald/[0.09]'
               : 'border-hairline bg-white/[0.03]',
@@ -194,7 +194,7 @@ function ConstellationNode({
         <span
           className={cn(
             'grid h-6 w-6 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.05]',
-            status === 'running' ? 'text-accent-blue' : status === 'done' ? 'text-accent-emerald' : 'text-ink-faint',
+            status === 'running' ? 'text-accent-primary' : status === 'done' ? 'text-accent-emerald' : 'text-ink-faint',
           )}
         >
           {status === 'done' ? <Check className="h-3 w-3" /> : <Icon className="h-3 w-3" />}

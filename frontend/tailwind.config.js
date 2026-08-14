@@ -17,13 +17,16 @@ export default {
           muted: '#A1A1AA',
           faint: '#71717A',
         },
+        // Brand ramp: a warm red -> orange -> yellow. Named by role rather
+        // than by hue so a future theme swap stays a one-file change.
         accent: {
-          blue: '#3B82F6',
-          purple: '#A855F7',
-          cyan: '#22D3EE',
+          primary: '#F97316',
+          secondary: '#EF4444',
+          tertiary: '#FBBF24',
+          // Status hues, deliberately outside the brand ramp.
           emerald: '#10B981',
           amber: '#F59E0B',
-          rose: '#F43F5E',
+          rose: '#FB7185',
         },
       },
       borderRadius: {
@@ -39,12 +42,14 @@ export default {
       boxShadow: {
         float: '0 8px 32px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)',
         lift: '0 24px 64px -16px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.06)',
-        'glow-blue': '0 0 24px -4px rgba(59,130,246,0.45)',
-        'glow-purple': '0 0 24px -4px rgba(168,85,247,0.45)',
-        'glow-emerald': '0 0 24px -4px rgba(16,185,129,0.45)',
+        // Kept deliberately soft: the warm ramp reads far brighter than the
+        // old blues at the same alpha, so a 0.45 glow looked like a lamp.
+        'glow-primary': '0 0 24px -6px rgba(249,115,22,0.30)',
+        'glow-secondary': '0 0 24px -6px rgba(239,68,68,0.28)',
+        'glow-emerald': '0 0 24px -6px rgba(16,185,129,0.30)',
       },
       backgroundImage: {
-        'gradient-accent': 'linear-gradient(135deg, #3B82F6 0%, #A855F7 50%, #22D3EE 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #EF4444 0%, #F97316 48%, #FBBF24 100%)',
         'gradient-hairline':
           'linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.10) 100%)',
       },

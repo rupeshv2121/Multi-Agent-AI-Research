@@ -115,7 +115,7 @@ export function GlobalSearch() {
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-1.5">
                           <span className="truncate text-[13px] font-medium">{item.title}</span>
-                          {item.pinned && <Pin className="h-2.5 w-2.5 shrink-0 text-accent-blue" />}
+                          {item.pinned && <Pin className="h-2.5 w-2.5 shrink-0 text-accent-primary" />}
                         </span>
                         {snippet && (
                           <span className="mt-0.5 block line-clamp-2 text-[11px] leading-relaxed text-ink-faint">

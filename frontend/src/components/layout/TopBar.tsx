@@ -66,8 +66,8 @@ export function TopBar() {
           >
             {running && (
               <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-accent-blue" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-blue" />
+                <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-accent-primary" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-primary" />
               </span>
             )}
             <p className="truncate text-sm font-medium">

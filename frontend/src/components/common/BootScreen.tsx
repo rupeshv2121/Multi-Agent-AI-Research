@@ -48,7 +48,7 @@ export function BootScreen() {
               className="relative"
             >
               <motion.span
-                className="absolute inset-0 scale-[2.2] rounded-full bg-accent-blue/25 blur-2xl"
+                className="absolute inset-0 scale-[2.2] rounded-full bg-accent-primary/25 blur-2xl"
                 animate={{ opacity: [0.4, 0.9, 0.4] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
               />

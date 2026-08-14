@@ -38,7 +38,7 @@ export function AgentCard({ agent, logs, index }: AgentCardProps) {
       transition={{ delay: reduced ? 0 : index * 0.05, type: 'spring', stiffness: 260, damping: 26 }}
       className={cn(
         'relative overflow-hidden rounded-2xl border bg-surface/60 backdrop-blur-xl transition-colors duration-500',
-        running ? 'border-accent-blue/30' : 'border-hairline',
+        running ? 'border-accent-primary/30' : 'border-hairline',
       )}
     >
       {/* Sheen that sweeps while the agent works. */}
@@ -125,7 +125,7 @@ export function AgentCard({ agent, logs, index }: AgentCardProps) {
       {/* Progress rail along the bottom edge while running. */}
       {running && (
         <motion.span
-          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-blue to-transparent"
+          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-primary to-transparent"
           animate={reduced ? undefined : { opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 1.6, repeat: Infinity }}
           aria-hidden

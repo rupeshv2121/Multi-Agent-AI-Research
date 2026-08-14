@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { useUIStore } from '@/store/uiStore'
 import { useResearchStore } from '@/store/researchStore'
 
-/** True when focus is somewhere the user is typing. */
-function isEditing(target: EventTarget | null): boolean {
+/**
+ * True only for rich-text targets, where ⌘B/⌘J are the browser's own editing
+ * commands. Plain inputs and textareas do not claim those keys — and since the
+ * composer holds focus most of the time, treating them as "editing" would mean
+ * the layout shortcuts almost never fired.
+ */
+function isRichTextEditing(target: EventTarget | null): boolean {
   const element = target as HTMLElement | null
-  if (!element) return false
-  const tag = element.tagName
-  return tag === 'INPUT' || tag === 'TEXTAREA' || element.isContentEditable
+  return element?.isContentEditable ?? false
 }
 
 /**
@@ -49,12 +52,12 @@ export function useKeyboardShortcuts() {
           ui.setSearchOpen(true)
           break
         case 'b':
-          if (isEditing(event.target)) return
+          if (isRichTextEditing(event.target)) return
           event.preventDefault()
           ui.toggleSidebar()
           break
         case 'j':
-          if (isEditing(event.target)) return
+          if (isRichTextEditing(event.target)) return
           event.preventDefault()
           ui.toggleAgentPanel()
           break

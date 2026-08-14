@@ -30,7 +30,7 @@ export interface AgentNodeData {
 
 const STATUS_RING: Record<AgentStatus, string> = {
   idle: 'border-white/10 bg-white/[0.03]',
-  running: 'border-accent-blue/50 bg-accent-blue/[0.10] shadow-glow-blue',
+  running: 'border-accent-primary/50 bg-accent-primary/[0.10] shadow-glow-primary',
   done: 'border-accent-emerald/45 bg-accent-emerald/[0.09]',
   warn: 'border-accent-amber/45 bg-accent-amber/[0.09]',
   error: 'border-accent-rose/50 bg-accent-rose/[0.10]',
@@ -38,7 +38,7 @@ const STATUS_RING: Record<AgentStatus, string> = {
 
 const STATUS_TEXT: Record<AgentStatus, string> = {
   idle: 'text-ink-faint',
-  running: 'text-accent-blue',
+  running: 'text-accent-primary',
   done: 'text-accent-emerald',
   warn: 'text-accent-amber',
   error: 'text-accent-rose',
@@ -54,7 +54,7 @@ function AgentNodeComponent({ data }: NodeProps<AgentNodeData>) {
       {/* Halo, drawn behind and only while the agent is live. */}
       {running && !reduced && (
         <motion.span
-          className="absolute -inset-2 rounded-2xl bg-accent-blue/20 blur-xl"
+          className="absolute -inset-2 rounded-2xl bg-accent-primary/20 blur-xl"
           animate={{ opacity: [0.35, 0.75, 0.35], scale: [0.96, 1.04, 0.96] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden

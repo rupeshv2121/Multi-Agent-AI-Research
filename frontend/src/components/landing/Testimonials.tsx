@@ -53,7 +53,7 @@ export function Testimonials() {
           onBlurCapture={() => setPaused(false)}
         >
           <div className="gradient-border relative min-h-[260px] rounded-[24px] bg-surface/50 p-7 backdrop-blur-2xl sm:min-h-[230px] sm:p-10">
-            <Quote className="mb-5 h-7 w-7 text-accent-blue/50" aria-hidden />
+            <Quote className="mb-5 h-7 w-7 text-accent-primary/50" aria-hidden />
 
             <AnimatePresence mode="wait">
               <motion.blockquote
@@ -67,7 +67,7 @@ export function Testimonials() {
 
                 <footer className="mt-6 flex items-center gap-3">
                   <span
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-accent text-[13px] font-semibold"
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-accent text-canvas text-[13px] font-semibold"
                     aria-hidden
                   >
                     {current.initials}
@@ -112,7 +112,7 @@ export function Testimonials() {
                   aria-current={i === index}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
-                    i === index ? 'w-6 bg-accent-blue' : 'w-1.5 bg-white/15 hover:bg-white/30',
+                    i === index ? 'w-6 bg-accent-primary' : 'w-1.5 bg-white/15 hover:bg-white/30',
                   )}
                 />
               ))}

@@ -14,7 +14,7 @@ const scoreTone = (score: number) =>
   score >= 8
     ? { ring: 'stroke-accent-emerald', text: 'text-accent-emerald', label: 'Strong' }
     : score >= 6
-      ? { ring: 'stroke-accent-blue', text: 'text-accent-blue', label: 'Solid' }
+      ? { ring: 'stroke-accent-primary', text: 'text-accent-primary', label: 'Solid' }
       : score >= 4
         ? { ring: 'stroke-accent-amber', text: 'text-accent-amber', label: 'Mixed' }
         : { ring: 'stroke-accent-rose', text: 'text-accent-rose', label: 'Weak' }

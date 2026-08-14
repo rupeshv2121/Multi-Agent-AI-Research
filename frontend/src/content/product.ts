@@ -49,7 +49,7 @@ export const AGENTS: AgentSpec[] = [
     detail:
       'Queries a live web index and collects candidate sources with their titles and snippets, keeping the search engine’s own ranking intact.',
     icon: Search,
-    tone: 'text-accent-blue',
+    tone: 'text-accent-primary',
   },
   {
     id: 'read',
@@ -58,7 +58,7 @@ export const AGENTS: AgentSpec[] = [
     detail:
       'Fetches the promising pages and pulls out the readable body text, so the writer works from full articles rather than search snippets.',
     icon: BookOpenCheck,
-    tone: 'text-accent-cyan',
+    tone: 'text-accent-tertiary',
   },
   {
     id: 'write',
@@ -67,7 +67,7 @@ export const AGENTS: AgentSpec[] = [
     detail:
       'Composes an introduction, key findings and a conclusion from the gathered research, listing every source it drew on.',
     icon: PenLine,
-    tone: 'text-accent-purple',
+    tone: 'text-accent-secondary',
   },
   {
     id: 'critique',
@@ -114,14 +114,14 @@ export const FEATURES: Feature[] = [
     description:
       'Four specialised agents hand work down a chain — search, read, write, critique — instead of one model guessing at everything.',
     icon: GitBranch,
-    tone: 'text-accent-blue',
+    tone: 'text-accent-primary',
   },
   {
     title: 'Live web research',
     description:
       'Every run queries the live web, so answers reflect what is published now rather than a training cut-off.',
     icon: Globe,
-    tone: 'text-accent-cyan',
+    tone: 'text-accent-tertiary',
   },
   {
     title: 'Self-critique and scoring',
@@ -135,21 +135,21 @@ export const FEATURES: Feature[] = [
     description:
       'Links are captured as the run proceeds and presented as cards with domain, favicon and a credibility hint.',
     icon: FileSearch,
-    tone: 'text-accent-purple',
+    tone: 'text-accent-secondary',
   },
   {
     title: 'Real-time streaming',
     description:
       'Server-sent events push every stage change as it happens — no polling, no waiting on a blank screen.',
     icon: Radio,
-    tone: 'text-accent-blue',
+    tone: 'text-accent-primary',
   },
   {
     title: 'Live pipeline graph',
     description:
       'Watch data flow between agents on an animated graph: running nodes glow, completed nodes settle green.',
     icon: Braces,
-    tone: 'text-accent-cyan',
+    tone: 'text-accent-tertiary',
   },
   {
     title: 'Report exports',
@@ -163,21 +163,21 @@ export const FEATURES: Feature[] = [
     description:
       'See where the time went and how your sources distribute across credibility tiers, with a table view behind every chart.',
     icon: BarChart3,
-    tone: 'text-accent-purple',
+    tone: 'text-accent-secondary',
   },
   {
     title: 'Markdown and tables',
     description:
       'Reports render as proper documents — headings, tables, code blocks and linked citations, not a wall of text.',
     icon: Table2,
-    tone: 'text-accent-blue',
+    tone: 'text-accent-primary',
   },
   {
     title: 'Research history',
     description:
       'Past runs are saved with their sources, scores and timings, searchable across full report text.',
     icon: Clock,
-    tone: 'text-accent-cyan',
+    tone: 'text-accent-tertiary',
   },
   {
     title: 'Linked citations',
@@ -191,7 +191,7 @@ export const FEATURES: Feature[] = [
     description:
       'A command palette, global search and shortcuts for every panel — the whole workspace is reachable without a mouse.',
     icon: Keyboard,
-    tone: 'text-accent-purple',
+    tone: 'text-accent-secondary',
   },
 ]
 
