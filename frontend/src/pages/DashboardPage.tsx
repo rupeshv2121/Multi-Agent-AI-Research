@@ -120,7 +120,7 @@ export default function DashboardPage() {
           title="No research yet"
           description="Run your first research topic and this dashboard will fill in with real numbers from your own runs."
           action={
-            <Link to="/">
+            <Link to="/app">
               <Button variant="primary" size="sm" magnetic className="mt-2">
                 Start researching
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -300,7 +300,7 @@ export default function DashboardPage() {
               {recent.map((conversation) => (
                 <Link
                   key={conversation.id}
-                  to="/"
+                  to="/app"
                   onClick={() => useResearchStore.getState().selectConversation(conversation.id)}
                   className="group flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-white/[0.05]"
                 >

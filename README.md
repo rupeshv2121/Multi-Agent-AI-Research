@@ -33,14 +33,22 @@ cd frontend && npm install && npm run build && cd ..
 python server.py
 ```
 
-Then open <http://127.0.0.1:8000>. Enter a topic and each agent reports its
-status live as it works — the page follows the run over server-sent events,
-with a pipeline graph, per-agent timings and a live log feed alongside.
+Then open <http://127.0.0.1:8000>. The landing page is at `/`; the research
+workspace is at `/app`. Enter a topic and each agent reports its status live as
+it works — the page follows the run over server-sent events, with a pipeline
+graph, per-agent timings and a live log feed alongside.
 
-`server.py` serves `frontend/dist` when it exists and falls back to the plain
-`web/` page otherwise, so the project still runs without a Node toolchain. See
-[frontend/README.md](frontend/README.md) for the dev-server workflow and for
-which features are backed by the API versus stored in the browser.
+`server.py` serves `frontend/dist`. If you start it before building, the API at
+`/api` still runs and the root path returns the build instructions rather than
+crashing. See [frontend/README.md](frontend/README.md) for the dev-server
+workflow and for which features are backed by the API versus stored in the
+browser.
+
+> **Before publishing the landing page:** the metrics, testimonials and paid
+> pricing tiers in `frontend/src/content/placeholders.ts` are invented
+> placeholders. Replace them or delete those sections — publishing fabricated
+> statistics or reviews as real is deceptive. The sections currently render a
+> visible note saying so.
 
 When the run finishes you get:
 
@@ -67,14 +75,16 @@ pipeline.py     The four-step run, emits progress events
 agents.py       Agent + chain definitions
 tools.py        web_search and scrape_url
 frontend/       React + TypeScript interface (see frontend/README.md)
-web/            index.html · style.css · app.js  — fallback, no build step
 ```
 
 ## Troubleshooting
 
-**"Couldn't reach the backend"** — the page was opened as a file (or via Live
-Server) instead of through the app. The agents run server-side, so you must
-start `python server.py` and browse to <http://127.0.0.1:8000>.
+**"Could not reach the research server"** — the agents run server-side, so
+`python server.py` must be running. Browse to <http://127.0.0.1:8000>, or to
+<http://localhost:5173> if you are using the Vite dev server.
+
+**The root path returns build instructions** — `frontend/dist` is missing. Run
+`cd frontend && npm install && npm run build`, then restart the server.
 
 **"Groq's daily token limit ... has been used up"** — the free Groq tier caps
 tokens per day (100k on `on_demand`). It resets on a 24-hour rolling window;

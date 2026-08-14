@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import {
   Bookmark,
   ChevronsLeft,
@@ -25,10 +25,10 @@ import { bucketByRecency, formatRelative } from '@/utils/format'
 import type { Conversation } from '@/types'
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Research', icon: Sparkles, end: true },
-  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/library', label: 'Library', icon: Library },
-  { to: '/settings', label: 'Settings', icon: Settings },
+  { to: '/app', label: 'Research', icon: Sparkles, end: true },
+  { to: '/app/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/app/library', label: 'Library', icon: Library },
+  { to: '/app/settings', label: 'Settings', icon: Settings },
 ]
 
 export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
@@ -58,13 +58,13 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
 
   const handleNew = () => {
     newConversation()
-    navigate('/')
+    navigate('/app')
     onNavigate?.()
   }
 
   const handleSelect = (id: string) => {
     selectConversation(id)
-    navigate('/')
+    navigate('/app')
     onNavigate?.()
   }
 
@@ -76,9 +76,11 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
       transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 260, damping: 30 }}
       aria-label="Primary navigation"
     >
-      {/* Brand */}
+      {/* Brand — links back to the landing page */}
       <div className="flex h-16 items-center gap-3 px-4">
-        <Logo />
+        <Link to="/" aria-label="Back to home" className="shrink-0">
+          <Logo />
+        </Link>
         <AnimatePresence initial={false}>
           {!collapsed && (
             <motion.div
@@ -88,8 +90,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.16 }}
             >
-              <p className="truncate text-sm font-semibold leading-tight">Multi-Agent</p>
-              <p className="truncate text-[11px] leading-tight text-ink-muted">AI Research</p>
+              <Link to="/" className="block">
+                <p className="truncate text-sm font-semibold leading-tight">Multi-Agent</p>
+                <p className="truncate text-[11px] leading-tight text-ink-muted">AI Research</p>
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>

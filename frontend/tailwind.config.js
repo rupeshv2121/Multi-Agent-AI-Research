@@ -32,6 +32,8 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        // Headings on the landing page; the workspace stays on Inter throughout.
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
       },
       boxShadow: {
@@ -70,6 +72,12 @@ export default {
           '0%, 70%, 100%': { opacity: '1' },
           '20%, 50%': { opacity: '0' },
         },
+        // -50% lands the duplicated half exactly where the first began, so the
+        // marquee loop is seamless.
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         shimmer: 'shimmer 2s infinite',
@@ -78,6 +86,7 @@ export default {
         'gradient-pan': 'gradient-pan 6s ease infinite',
         'dash-flow': 'dash-flow 0.6s linear infinite',
         'caret-blink': 'caret-blink 1.2s step-end infinite',
+        marquee: 'marquee 34s linear infinite',
       },
       transitionTimingFunction: {
         spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',

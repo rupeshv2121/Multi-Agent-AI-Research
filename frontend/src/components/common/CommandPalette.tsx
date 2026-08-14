@@ -96,7 +96,7 @@ export function CommandPalette() {
                     onSelect={() =>
                       run(() => {
                         newConversation()
-                        navigate('/')
+                        navigate('/app')
                       })
                     }
                   />
@@ -139,10 +139,10 @@ export function CommandPalette() {
                 </Group>
 
                 <Group heading="Navigate">
-                  <Item icon={Sparkles} label="Go to Research" onSelect={() => run(() => navigate('/'))} />
-                  <Item icon={LayoutDashboard} label="Go to Dashboard" onSelect={() => run(() => navigate('/dashboard'))} />
-                  <Item icon={Library} label="Go to Library" onSelect={() => run(() => navigate('/library'))} />
-                  <Item icon={Settings} label="Go to Settings" onSelect={() => run(() => navigate('/settings'))} />
+                  <Item icon={Sparkles} label="Go to Research" onSelect={() => run(() => navigate('/app'))} />
+                  <Item icon={LayoutDashboard} label="Go to Dashboard" onSelect={() => run(() => navigate('/app/dashboard'))} />
+                  <Item icon={Library} label="Go to Library" onSelect={() => run(() => navigate('/app/library'))} />
+                  <Item icon={Settings} label="Go to Settings" onSelect={() => run(() => navigate('/app/settings'))} />
                   <Item icon={Search} label="Search history" shortcut="⌘/" onSelect={() => run(() => setSearchOpen(true))} />
                 </Group>
 

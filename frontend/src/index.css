@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,14 +15,23 @@
   }
 
   html,
-  body,
+  body {
+    min-height: 100%;
+  }
+
   #root {
-    height: 100%;
+    min-height: 100vh;
   }
 
   body {
     @apply bg-canvas text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /* The workspace is a fixed-height app shell that manages its own scrolling;
+     the landing page scrolls the document. AppLayout sets this on <body> for
+     as long as it is mounted. */
+  body.app-shell {
     overflow: hidden;
   }
 

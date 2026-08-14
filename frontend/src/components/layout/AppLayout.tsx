@@ -31,7 +31,7 @@ export function AppLayout() {
   useKeyboardShortcuts()
 
   // The agent panel is only meaningful on the research view.
-  const showAgentPanel = location.pathname === '/'
+  const showAgentPanel = location.pathname === '/app'
 
   const dragging = useRef(false)
 
@@ -62,8 +62,15 @@ export function AppLayout() {
     }
   }, [setAgentPanelWidth])
 
+  // The shell owns the viewport for as long as it is mounted; the landing page
+  // needs the document to scroll normally, so this is scoped rather than global.
+  useEffect(() => {
+    document.body.classList.add('app-shell')
+    return () => document.body.classList.remove('app-shell')
+  }, [])
+
   return (
-    <div className="relative flex h-full w-full overflow-hidden">
+    <div className="relative flex h-screen w-full overflow-hidden">
       <AuroraBackground />
       <CursorGlow />
 

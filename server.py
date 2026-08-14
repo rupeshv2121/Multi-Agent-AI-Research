@@ -179,7 +179,7 @@ def download_report(job_id: str):
 class SPAStaticFiles(StaticFiles):
     """StaticFiles that serves index.html for unknown paths.
 
-    The React app routes /dashboard, /library and /settings on the client, so a
+    The React app routes /app, /app/dashboard and friends on the client, so a
     hard refresh on one of those asks the server for a file that does not
     exist. `html=True` alone only covers directories, so a missing *file* still
     404s — this turns that into the app shell and lets the router take over.
@@ -199,14 +199,28 @@ class SPAStaticFiles(StaticFiles):
             return await super().get_response("index.html", scope)
 
 
+BUILD_HINT = (
+    "The frontend has not been built yet.\n\n"
+    "    cd frontend && npm install && npm run build\n\n"
+    "Then restart this server. The JSON API at /api is already running — see "
+    "/api/docs."
+)
+
+
 # Serve the frontend from the root. Mounted last, so the /api routes above are
-# matched first. Prefers the built React app; falls back to the original web/
-# page when frontend/dist does not exist, so the project still runs with no
-# Node toolchain installed.
+# matched first.
 if DIST_DIR.is_dir():
     app.mount("/", SPAStaticFiles(directory=DIST_DIR, html=True), name="app")
-else:
+elif WEB_DIR.is_dir():
+    # The original no-build page, if it is still around.
     app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")
+else:
+    # Neither exists. Mounting StaticFiles on a missing directory raises at
+    # startup, which would take the API down with it — so serve the build
+    # instructions instead and leave /api working.
+    @app.get("/{_path:path}", response_class=PlainTextResponse)
+    def missing_frontend(_path: str):
+        return PlainTextResponse(BUILD_HINT, status_code=503)
 
 
 if __name__ == "__main__":

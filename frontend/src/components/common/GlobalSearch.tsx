@@ -48,7 +48,7 @@ export function GlobalSearch() {
 
   const openConversation = (id: string) => {
     selectConversation(id)
-    navigate('/')
+    navigate('/app')
     setOpen(false)
     setQuery('')
   }

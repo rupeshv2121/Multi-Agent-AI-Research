@@ -48,7 +48,7 @@ export default function LibraryPage() {
 
   const open = (id: string) => {
     selectConversation(id)
-    navigate('/')
+    navigate('/app')
   }
 
   return (
@@ -112,7 +112,7 @@ export default function LibraryPage() {
             }
             action={
               conversations.length === 0 ? (
-                <Link to="/">
+                <Link to="/app">
                   <Button variant="primary" size="sm" magnetic className="mt-2">
                     Start researching
                   </Button>

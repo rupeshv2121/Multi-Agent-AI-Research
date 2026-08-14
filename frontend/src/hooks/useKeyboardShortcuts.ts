@@ -62,7 +62,7 @@ export function useKeyboardShortcuts() {
           if (!event.shiftKey) return
           event.preventDefault()
           useResearchStore.getState().newConversation()
-          navigate('/')
+          navigate('/app')
           break
       }
     }
